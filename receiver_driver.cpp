@@ -17,7 +17,7 @@ void ReceiverDriver::init(
     this->spiSelectPin = spiSelectPin;
 }
 
-void ReceiverDriver::setSynthRegisterA(uint32_t data) {
+void ReceiverDriver::setSynthRegisterB(uint32_t data) {
     this->sendRegister(SPI_ADDRESS_SYNTH_A, data);
 }
 

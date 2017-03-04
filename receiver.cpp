@@ -17,7 +17,7 @@ void Receiver::setFrequency(uint16_t frequency) {
     uint16_t regA = frequency % 32;
     uint16_t synthRegB = (regN << 7) | regA;
 
-    this->driver.setSynthRegisterA(synthRegB);
+    this->driver.setSynthRegisterB(synthRegB);
 }
 
 

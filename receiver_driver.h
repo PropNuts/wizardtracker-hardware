@@ -13,7 +13,7 @@ class ReceiverDriver {
             uint8_t spiSelectPin
         );
 
-        void setSynthRegisterA(uint32_t data);
+        void setSynthRegisterB(uint32_t data);
 
 
     private:
