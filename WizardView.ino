@@ -9,16 +9,22 @@ Receiver rx4 = Receiver(2, 3, 7);
 
 void setup() {
     // Wait for modules to settle.
-    delay(1000);
+    delay(2000);
 
     // Set to race frequencies.
-    rx1.setFrequency(5665);
+    rx1.setFrequency(5805);
+    delay(500);
     rx2.setFrequency(5745);
+    delay(500);
     rx3.setFrequency(5885);
+    delay(500);
     rx4.setFrequency(5945);
 }
 
 void loop() {
-    // Do nothing.
+    // Flash the LED.
+    digitalWrite(13, HIGH);
+    delay(1000);
+    digitalWrite(13, LOW);
     delay(1000);
 }
