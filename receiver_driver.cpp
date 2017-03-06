@@ -4,7 +4,7 @@
 #include "receiver_driver.h"
 
 
-#define SPI_ADDRESS_SYNTH_A 0x01
+#define SPI_ADDRESS_SYNTH_B 0x01
 
 
 void ReceiverDriver::init(
@@ -18,7 +18,7 @@ void ReceiverDriver::init(
 }
 
 void ReceiverDriver::setSynthRegisterB(uint32_t data) {
-    this->sendRegister(SPI_ADDRESS_SYNTH_A, data);
+    this->sendRegister(SPI_ADDRESS_SYNTH_B, data);
 }
 
 
@@ -32,9 +32,9 @@ void ReceiverDriver::sendRegister(uint8_t address, uint32_t data) {
 
     // Finished clocking data in
     this->sendSlaveSelect(HIGH);
-    digitalWrite(this->spiSelectPin, LOW);
     digitalWrite(this->spiClockPin, LOW);
     digitalWrite(this->spiDataPin, LOW);
+    delayMicroseconds(1);
 }
 
 void ReceiverDriver::sendBits(uint32_t bits, uint8_t count) {
