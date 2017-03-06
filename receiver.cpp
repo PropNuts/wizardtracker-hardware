@@ -19,6 +19,3 @@ void Receiver::setFrequency(uint16_t frequency) {
 
     this->driver.setSynthRegisterB(synthRegB);
 }
-
-
-
