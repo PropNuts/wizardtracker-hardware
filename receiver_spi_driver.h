@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 
-class ReceiverDriver {
+class ReceiverSpiDriver {
     public:
         void init(
             uint8_t spiClockPin,

@@ -3,7 +3,7 @@
 
 
 #include <stdint.h>
-#include "receiver_driver.h"
+#include "receiver_spi_driver.h"
 
 
 class Receiver {
@@ -11,13 +11,18 @@ class Receiver {
         Receiver(
             uint8_t spiClockPin,
             uint8_t spiDataPin,
-            uint8_t spiSelectPin
+            uint8_t spiSelectPin,
+            uint8_t rssiPin
         );
 
+        void updateRssi();
         void setFrequency(uint16_t frequency);
 
+        uint16_t rssi;
+
     private:
-        ReceiverDriver driver;
+        ReceiverSpiDriver driver;
+        uint8_t rssiPin;
 };
 
 
