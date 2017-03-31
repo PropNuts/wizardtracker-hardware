@@ -15,7 +15,7 @@
 #define PIN_RSSI_RX3 A2
 #define PIN_RSSI_RX4 A3
 
-#define SERIAL_DELAY 25
+#define SERIAL_DELAY 10
 
 
 Receiver rx1 = Receiver(
