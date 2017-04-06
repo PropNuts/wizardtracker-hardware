@@ -70,7 +70,7 @@ void setup() {
 
     // Set to race frequencies.
     delay(1000); // Wait for modules to settle.
-    rx1.setFrequency(5805);
+    rx1.setFrequency(5665);
     rx2.setFrequency(5745);
     rx3.setFrequency(5885);
     rx4.setFrequency(5945);
