@@ -1,4 +1,4 @@
-update=28/03/2017 21:24:33
+update=18/08/2017 12:16:56
 version=1
 last_client=kicad
 [pcbnew]
@@ -57,5 +57,5 @@ LibName25=siliconi
 LibName26=opto
 LibName27=atmel
 LibName28=contrib
-LibName29=valves
-LibName30=library/rx5808
+LibName29=library/rx5808
+LibName30=sensors
