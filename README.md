@@ -7,13 +7,19 @@ an RSSI-based lap timer for drone racing.
 
 The KiCad files can be found under `hardware/`.
 
+<p align="center">
+  <img width="600" src="https://github.com/PropNuts/wizardtracker-hardware/blob/master/media/pcb.png">
+</p>
+
 The current revision (v2) allows for a total of either eight receivers, or six
 receivers with voltage and temperature monitoring. A voltage regulator and XT60
 are mounted onboard to provide power.
 
-<a href="https://oshpark.com/shared_projects/VPjVFjat">
-  <img src="https://oshpark.com/assets/badge-5b7ec47045b78aef6eb9d83b3bac6b1920de805e9a0c227658eac6e19a045b9c.png" alt="Order from OSH Park">
-</a>
+<p>
+  <a href="https://oshpark.com/shared_projects/VPjVFjat">
+    <img src="https://oshpark.com/assets/badge-5b7ec47045b78aef6eb9d83b3bac6b1920de805e9a0c227658eac6e19a045b9c.png" alt="Order from OSH Park">
+  </a>
+</p>
 
 ### Parts List
 
@@ -26,7 +32,7 @@ You can put together a full system for around ~£65.
 - [LM35](https://www.banggood.com/3Pcs-LM35DZ-TO-92-LM35-Precision-Centigrade-Temperature-Sensor-p-1091397.html?p=U103211727939201506N)
 - [Resistors (1x 330, 1x 10k, 1x 100k)](https://www.banggood.com/Wholesale-Metal-Film-Resistor-Assorted-Kit-30-Kinds-Value-Total-600pcs-20pcs-Each-p-53320.html?p=U103211727939201506N)
 - [LEDs](https://www.banggood.com/100pcs-3mm-LED-Light-emitting-Diode-5-Colors-Electronic-Component-Pack-p-1106574.html?p=U103211727939201506N)
-- [Schottky Diode](https://www.banggood.com/10pcs-SB5100-5_0A-SCHOTTKY-BARRIER-Diode-100V-5A-p-1006489.html?p=U103211727939201506N)
+- [Schottky Diode (1x 1N5817)](https://www.banggood.com/100-Pcs-030892-Diodes-Package-Rectifier-Schottky-8-Type-In-Component-Box-p-1164787.html?p=U103211727939201506N)
 - [Pin Headers](https://www.banggood.com/10-Pcs-40-Pin-2_54mm-Single-Row-Male-Pin-Header-Strip-For-Arduino-p-918427.html?p=U103211727939201506N)
 
 _These are affiliate links._
