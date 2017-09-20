@@ -1,5 +1,5 @@
 #include <stdint.h>
-#include "receiver.h"
+#include "Receiver.h"
 
 
 #define PIN_LED 13

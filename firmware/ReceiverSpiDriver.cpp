@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-#include "receiver_spi_driver.h"
+#include "ReceiverSpiDriver.h"
 
 
 #define SPI_ADDRESS_SYNTH_B 0x01

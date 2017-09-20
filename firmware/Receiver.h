@@ -3,7 +3,7 @@
 
 
 #include <stdint.h>
-#include "receiver_spi_driver.h"
+#include "ReceiverSpiDriver.h"
 
 
 class Receiver {
