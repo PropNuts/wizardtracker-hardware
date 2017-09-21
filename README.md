@@ -41,18 +41,26 @@ _These are affiliate links._
 
 1. Grab the latest version of the Arduino IDE.
 2. Clone the repository and open `firmware/firmware.ino`.
-3. Compile and flash the code.
-4. Pray the magic smoke stays in.
+3. Edit `Config.h` to your needs.
+4. Compile and flash the code.
+5. Pray the magic smoke stays in.
 
 ### Protocol
 
-On boot, the firmware opens serial at `115200bps`. After a short delay it will
-begin sending RSSI values for each module seperated by a tab, ending in a new
-line. e.g.:
+On boot, the firmware opens serial at `250000bps`. After a short delay, it will
+begin sending RSSI values for each module, seperated by a space, ending in a new
+line. Each line is prefixd with `r: `.
 
-    110    \t    220    \t    150    \t    243    \n
-    140    \t    231    \t    143    \t    192    \n
+    r: 110 220 150 243 135 354
+    r: 140 231 143 192 148 344
     ...etc
+
+If enabled, voltage and temperature values will be sent periodically. Voltage
+is prefixed with `v: ` and temperature is prefixed with `t: `.
+
+    v: 16.08
+    t: 56.33
+    ... etc
 
 ## Acknowledgements
 

@@ -8,7 +8,7 @@
 
 class Receiver {
     public:
-        Receiver(
+        void init(
             uint8_t spiClockPin,
             uint8_t spiDataPin,
             uint8_t spiSelectPin,

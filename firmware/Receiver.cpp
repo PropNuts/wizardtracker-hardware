@@ -3,7 +3,7 @@
 #include "receiver.h"
 
 
-Receiver::Receiver(
+void Receiver::init(
     uint8_t spiClockPin,
     uint8_t spiDataPin,
     uint8_t spiSelectPin,
