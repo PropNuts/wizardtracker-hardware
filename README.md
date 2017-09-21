@@ -49,17 +49,28 @@ _These are affiliate links._
 
 On boot, the firmware opens serial at `250000bps`. After a short delay, it will
 begin sending RSSI values for each module, seperated by a space, ending in a new
-line. Each line is prefixd with `r: `.
+line. Each line is prefixd with `r `.
 
-    r: 110 220 150 243 135 354
-    r: 140 231 143 192 148 344
-    ...etc
+    < r 110 220 150 243 135 354
+    < r 140 231 143 192 148 344
+    ... etc
 
 If enabled, voltage and temperature values will be sent periodically. Voltage
-is prefixed with `v: ` and temperature is prefixed with `t: `.
+is prefixed with `v ` and temperature is prefixed with `t `.
 
-    v: 16.08
-    t: 56.33
+    < v 16.08
+    < t 56.33
+    ... etc
+
+#### Commands
+
+Frequency can be set by sending `f <rx index> <frequency>` followed by a new
+line.
+
+    > f 0 5745
+    < ok
+    > f 1 5975
+    < ok
     ... etc
 
 ## Acknowledgements

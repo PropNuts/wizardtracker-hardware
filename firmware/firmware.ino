@@ -95,11 +95,13 @@ void loop() {
             monitorTimer.reset();
         }
     #endif
+
+    parseCommands();
 }
 
 
 void writeRssiData() {
-    static const char* prefix = "r: ";
+    static const char* prefix = "r ";
     static const char seperator = ' ';
 
     Serial.print(prefix);
@@ -116,7 +118,7 @@ void writeRssiData() {
 
 #ifdef TEMP_MONITORING_ENABLED
 void writeTempMonitorData() {
-    static const char* prefix = "t: ";
+    static const char* prefix = "t ";
 
     Serial.print(prefix);
     Serial.print(tempMonitor.value);
@@ -126,10 +128,35 @@ void writeTempMonitorData() {
 
 #ifdef VOLTAGE_MONITORING_ENABLED
 void writeVoltMonitorData() {
-    static const char* prefix = "v: ";
+    static const char* prefix = "v ";
 
     Serial.print(prefix);
     Serial.print(voltMonitor.value);
     Serial.println();
 }
 #endif
+
+void parseCommands() {
+    if (Serial.available() > 0) {
+        char command = Serial.read();
+
+        switch (command) {
+            // Set Frequency
+            case 'f':
+                uint8_t receiverIndex = Serial.parseInt();
+                uint16_t frequency = Serial.parseInt();
+
+                if (receiverIndex == 0 && frequency == 0)
+                    break;
+
+                if (receiverIndex < 0 || receiverIndex >= RECEIVER_COUNT)
+                    break;
+
+                receivers[receiverIndex].setFrequency(frequency);
+                break;
+        }
+
+        Serial.find('\n');
+        Serial.println("ok");
+    }
+}
