@@ -64,8 +64,8 @@ is prefixed with `v ` and temperature is prefixed with `t `.
 
 #### Commands
 
-Frequency can be set by sending `f <rx index> <frequency>` followed by a new
-line.
+Frequencies can be set by sending `f <rx index> <frequency>` followed by a new
+line. These frequencies will be saved and reloaded on startup.
 
     > f 0 5745
     < ok

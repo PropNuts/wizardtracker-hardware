@@ -1,6 +1,8 @@
 #include <stdint.h>
 
 #include "Config.h"
+
+#include "EepromSettings.h"
 #include "Receiver.h"
 #include "Monitor.h"
 #include "Timer.h"
@@ -45,6 +47,8 @@ void setup() {
         pinMode(VOLTAGE_MONITORING_PIN, INPUT);
     #endif
 
+    EepromSettings.load();
+
     // Configure receivers.
     for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
         receivers[i].init(
@@ -54,19 +58,20 @@ void setup() {
             RECEIVER_PIN_RSSI_START + i
         );
 
-        receivers[i].setFrequency(5695);
+        receivers[i].setFrequency(EepromSettings.frequency[i]);
     }
 
     // Wait for modules to settle.
     delay(BOOT_DELAY_MS);
 
-    // Get ready to go!
     rssiTimer.reset();
     #ifdef MONITORING_ENABLED
         monitorTimer.reset();
     #endif
 
     Serial.begin(SERIAL_BAUD);
+
+    // Ready to go!
     digitalWrite(LED_PIN, HIGH);
 }
 
@@ -153,7 +158,9 @@ void parseCommands() {
                     break;
 
                 receivers[receiverIndex].setFrequency(frequency);
-                break;
+                EepromSettings.frequency[receiverIndex] = frequency;
+                EepromSettings.save();
+            break;
         }
 
         Serial.find('\n');
