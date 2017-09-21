@@ -51,8 +51,11 @@ On boot, the firmware opens serial at `250000bps`. After a short delay, it will
 begin sending RSSI values for each module, seperated by a space, ending in a new
 line. Each line is prefixd with `r `.
 
-    < r 110 220 150 243 135 354
-    < r 140 231 143 192 148 344
+In calibrated output mode, values range between `0` to `255`. In raw output
+mode (default), values range between `0` to  `1023`.
+
+    < r 110 220 150 243 135 254
+    < r 140 231 143 192 148 244
     ... etc
 
 If enabled, voltage and temperature values will be sent periodically. Voltage
@@ -64,7 +67,10 @@ is prefixed with `v ` and temperature is prefixed with `t `.
 
 #### Commands
 
-Frequencies can be set by sending `f <rx index> <frequency>` followed by a new
+The command parser is extremely niave, with little to no error checking. Expect
+strange results with malformed commands.
+
+Frequencies can be set by sending `f <index> <frequency>` followed by a new
 line. These frequencies will be saved and reloaded on startup.
 
     > f 0 5745
@@ -72,6 +78,31 @@ line. These frequencies will be saved and reloaded on startup.
     > f 1 5975
     < ok
     ... etc
+
+Modules can be calibrated using `n` (minimum) and `m` (maximum). These
+calibration values will be saved and reloaded on startup. The device must be
+rebooted for calibration to take effect.
+
+    [all modules set to same frequency]
+    [transmitter powered down]
+    > n
+    < ok
+    [transmitter powered up]
+    > m
+    < ok
+
+Output can be toggled between raw output using `r`, and calibration output
+using `s`. The default mode is raw output. This setting is saved and will be
+reloaded on startup.
+
+    > r
+    < ok
+    < r 395 345 299 405 514 445
+    < ... etc
+    > s
+    < ok
+    < r 0 5 8 1 10 13
+    < ... etc
 
 ## Acknowledgements
 

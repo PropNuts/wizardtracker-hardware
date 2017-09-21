@@ -55,7 +55,9 @@ void setup() {
             RECEIVER_PIN_SPI_CLK,
             RECEIVER_PIN_SPI_DATA,
             RECEIVER_PIN_SPI_SS_START - i,
-            RECEIVER_PIN_RSSI_START + i
+            RECEIVER_PIN_RSSI_START + i,
+            EepromSettings.rssiMin[i],
+            EepromSettings.rssiMax[i]
         );
 
         receivers[i].setFrequency(EepromSettings.frequency[i]);
@@ -112,7 +114,10 @@ void writeRssiData() {
     Serial.print(prefix);
 
     for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
-        Serial.print(receivers[i].rssi, DEC);
+        if (EepromSettings.rawMode)
+            Serial.print(receivers[i].rssiRaw, DEC);
+        else
+            Serial.print(receivers[i].rssi, DEC);
 
         if (i < RECEIVER_COUNT - 1)
             Serial.print(seperator);
@@ -146,8 +151,8 @@ void parseCommands() {
         char command = Serial.read();
 
         switch (command) {
-            // Set Frequency
-            case 'f':
+            // Set frequency.
+            case 'f': {
                 uint8_t receiverIndex = Serial.parseInt();
                 uint16_t frequency = Serial.parseInt();
 
@@ -160,7 +165,39 @@ void parseCommands() {
                 receivers[receiverIndex].setFrequency(frequency);
                 EepromSettings.frequency[receiverIndex] = frequency;
                 EepromSettings.save();
-            break;
+            } break;
+
+            // Calibrate minimum RSSI values.
+            case 'n': {
+                for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
+                    EepromSettings.rssiMin[i] =
+                        (uint16_t) receivers[i].rssiRaw * 0.975f;
+                }
+
+                EepromSettings.save();
+            } break;
+
+            // Calibrate maximum RSSI values.
+            case 'm': {
+                for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
+                    EepromSettings.rssiMax[i] =
+                        (uint16_t) receivers[i].rssiRaw * 1.025f;
+                }
+
+                EepromSettings.save();
+            } break;
+
+            // Enable raw mode.
+            case 'r': {
+                EepromSettings.rawMode = true;
+                EepromSettings.save();
+            } break;
+
+            // Disable raw mode.
+            case 's': {
+                EepromSettings.rawMode = false;
+                EepromSettings.save();
+            } break;
         }
 
         Serial.find('\n');

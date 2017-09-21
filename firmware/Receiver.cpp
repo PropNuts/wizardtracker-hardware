@@ -7,9 +7,14 @@ void Receiver::init(
     uint8_t spiClockPin,
     uint8_t spiDataPin,
     uint8_t spiSelectPin,
-    uint8_t rssiPin
+    uint8_t rssiPin,
+    uint16_t rssiMin,
+    uint16_t rssiMax
 ) {
     this->rssiPin = rssiPin;
+    this->rssiMin = rssiMin;
+    this->rssiMax = rssiMax;
+
     this->driver.init(spiClockPin, spiDataPin, spiSelectPin);
 }
 
@@ -25,5 +30,10 @@ void Receiver::setFrequency(uint16_t frequency) {
 
 void Receiver::updateRssi() {
     analogRead(this->rssiPin); // Fake read to settle ADC
-    this->rssi = analogRead(this->rssiPin);
+    this->rssiRaw = analogRead(this->rssiPin);
+    this->rssi = constrain(
+        map(this->rssiRaw, this->rssiMin, this->rssiMax, 0, 255),
+        0,
+        255
+    );
 }
