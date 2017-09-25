@@ -47,11 +47,11 @@
 #define SERIAL_BAUD 250000
 
 // Delay between RSSI messages. Too fast and the buffer clogs and things get
-// weird. 2ms is a good default value.
-#define RSSI_DELAY_MS 2
+// weird. 5ms is a good default value.
+#define RSSI_DELAY_MS 5
 
 // Delay between monitoring messages.
-#define MONITORING_DELAY_MS 1000
+#define MONITORING_DELAY_MS 10000
 
 
 // Misc
