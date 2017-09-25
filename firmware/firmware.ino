@@ -8,6 +8,15 @@
 #include "Timer.h"
 
 
+#ifndef cbi
+    #define cbi(sfr, bit) (_SFR_BYTE(sfr) &= ~_BV(bit))
+#endif
+
+#ifndef sbi
+    #define sbi(sfr, bit) (_SFR_BYTE(sfr) |= _BV(bit))
+#endif
+
+
 Receiver receivers[RECEIVER_COUNT];
 
 #ifdef TEMP_MONITORING_ENABLED
@@ -28,6 +37,8 @@ const char serialSeperator = ' ';
 
 
 void setup() {
+    enableFastAdcRead();
+
     // Set pin defaults.
     pinMode(LED_PIN, OUTPUT);
     pinMode(RECEIVER_PIN_SPI_CLK, OUTPUT);
@@ -222,4 +233,10 @@ void parseCommands() {
         Serial.find('\n');
         Serial.println("ok");
     }
+}
+
+void enableFastAdcRead() {
+    sbi(ADCSRA, ADPS2);
+    cbi(ADCSRA, ADPS1);
+    cbi(ADCSRA, ADPS0);
 }
