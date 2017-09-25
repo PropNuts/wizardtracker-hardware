@@ -52,6 +52,9 @@ void setup() {
 
     EepromSettings.load();
 
+    // Wait for modules to settle.
+    delay(BOOT_DELAY_MS);
+
     // Configure receivers.
     for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
         receivers[i].init(
@@ -65,9 +68,6 @@ void setup() {
 
         receivers[i].setFrequency(EepromSettings.frequency[i]);
     }
-
-    // Wait for modules to settle.
-    delay(BOOT_DELAY_MS);
 
     rssiTimer.reset();
     #ifdef MONITORING_ENABLED
