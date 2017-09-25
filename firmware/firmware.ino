@@ -24,6 +24,9 @@ Timer rssiTimer(RSSI_DELAY_MS);
 #endif
 
 
+const char serialSeperator = ' ';
+
+
 void setup() {
     // Set pin defaults.
     pinMode(LED_PIN, OUTPUT);
@@ -109,7 +112,6 @@ void loop() {
 
 void writeRssiData() {
     static const char* prefix = "r ";
-    static const char seperator = ' ';
 
     Serial.print(prefix);
 
@@ -120,7 +122,7 @@ void writeRssiData() {
             Serial.print(receivers[i].rssi, DEC);
 
         if (i < RECEIVER_COUNT - 1)
-            Serial.print(seperator);
+            Serial.print(serialSeperator);
     }
 
     Serial.println();
@@ -151,6 +153,23 @@ void parseCommands() {
         char command = Serial.read();
 
         switch (command) {
+            // Status
+            case '?': {
+                static const char* prefix = "? ";
+
+                Serial.print(prefix);
+                Serial.print(RECEIVER_COUNT, DEC);
+                Serial.print(serialSeperator);
+
+                for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
+                    Serial.print(EepromSettings.frequency[i]);
+                    Serial.print(serialSeperator);
+                }
+
+                Serial.print(EepromSettings.rawMode ? 1 : 0, DEC);
+                Serial.println();
+            } break;
+
             // Set frequency.
             case 'f': {
                 uint8_t receiverIndex = Serial.parseInt();

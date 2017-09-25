@@ -68,10 +68,11 @@ is prefixed with `v ` and temperature is prefixed with `t `.
 #### Commands
 
 The command parser is extremely niave, with little to no error checking. Expect
-strange results with malformed commands.
+strange results with malformed commands. All command should end in a new line
+character.
 
-Frequencies can be set by sending `f <index> <frequency>` followed by a new
-line. These frequencies will be saved and reloaded on startup.
+Frequencies can be set by sending `f <index> <frequency>`. These frequencies
+will be saved and reloaded on startup.
 
     > f 0 5745
     < ok
@@ -103,6 +104,14 @@ reloaded on startup.
     < ok
     < r 0 5 8 1 10 13
     < ... etc
+
+Information about the device can be requested using `?`. The device will respond
+in the format `? <module count> <frequency 1>...<frequency n> <raw mode>`.
+
+    > ?
+    < ? 6 5695 5695 5695 5695 5695 5695 1
+    [6 receivers all on 5695MHz, with raw mode enabled]
+    < ok
 
 ## Acknowledgements
 
