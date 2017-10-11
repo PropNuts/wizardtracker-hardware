@@ -141,7 +141,7 @@ void writeRssiData() {
 #ifdef TEMP_MONITORING_ENABLED
 void writeTempMonitorData() {
     Serial.print(F("t "));
-    Serial.print(tempMonitor.value, DEC);
+    Serial.print(tempMonitor.value, 2);
     Serial.println();
 }
 #endif
@@ -149,7 +149,7 @@ void writeTempMonitorData() {
 #ifdef VOLTAGE_MONITORING_ENABLED
 void writeVoltMonitorData() {
     Serial.print(F("v "));
-    Serial.print(voltMonitor.value, DEC);
+    Serial.print(voltMonitor.value, 2);
     Serial.println();
 }
 #endif
