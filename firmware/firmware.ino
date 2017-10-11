@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <avr/pgmspace.h>
 
 #include "Config.h"
 
@@ -122,9 +123,7 @@ void loop() {
 
 
 void writeRssiData() {
-    static const char* prefix = "r ";
-
-    Serial.print(prefix);
+    Serial.print(F("r "));
 
     for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
         if (EepromSettings.rawMode)
@@ -141,34 +140,28 @@ void writeRssiData() {
 
 #ifdef TEMP_MONITORING_ENABLED
 void writeTempMonitorData() {
-    static const char* prefix = "t ";
-
-    Serial.print(prefix);
-    Serial.print(tempMonitor.value);
+    Serial.print(F("t "));
+    Serial.print(tempMonitor.value, DEC);
     Serial.println();
 }
 #endif
 
 #ifdef VOLTAGE_MONITORING_ENABLED
 void writeVoltMonitorData() {
-    static const char* prefix = "v ";
-
-    Serial.print(prefix);
-    Serial.print(voltMonitor.value);
+    Serial.print(F("v "));
+    Serial.print(voltMonitor.value, DEC);
     Serial.println();
 }
 #endif
 
 void parseCommands() {
     if (Serial.available() > 0) {
-        char command = Serial.read();
+        const char command = Serial.read();
 
         switch (command) {
             // Status
             case '?': {
-                static const char* prefix = "? ";
-
-                Serial.print(prefix);
+                Serial.print(F("? "));
                 Serial.print(RECEIVER_COUNT, DEC);
                 Serial.print(serialSeperator);
 
@@ -231,7 +224,7 @@ void parseCommands() {
         }
 
         Serial.find('\n');
-        Serial.println("ok");
+        Serial.println(F("ok"));
     }
 }
 
