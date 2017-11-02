@@ -35,6 +35,7 @@ Timer rssiTimer(RSSI_DELAY_MS);
 
 
 const char serialSeperator = ' ';
+const char lineEnding = '\n';
 
 
 void setup() {
@@ -135,14 +136,14 @@ void writeRssiData() {
             Serial.print(serialSeperator);
     }
 
-    Serial.println();
+    Serial.print(lineEnding);
 }
 
 #ifdef TEMP_MONITORING_ENABLED
 void writeTempMonitorData() {
     Serial.print(F("t "));
     Serial.print(tempMonitor.value, 2);
-    Serial.println();
+    Serial.print(lineEnding);
 }
 #endif
 
@@ -150,7 +151,7 @@ void writeTempMonitorData() {
 void writeVoltMonitorData() {
     Serial.print(F("v "));
     Serial.print(voltMonitor.value, 2);
-    Serial.println();
+    Serial.print(lineEnding);
 }
 #endif
 
@@ -171,7 +172,7 @@ void parseCommands() {
                 }
 
                 Serial.print(EepromSettings.rawMode ? 1 : 0, DEC);
-                Serial.println();
+                Serial.print(lineEnding);
             } break;
 
             // Set frequency.
@@ -194,7 +195,7 @@ void parseCommands() {
             case 'n': {
                 for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
                     EepromSettings.rssiMin[i] =
-                        (uint16_t) receivers[i].rssiRaw * 0.975f;
+                        (uint16_t) receivers[i].rssiRaw;
                 }
 
                 EepromSettings.save();
@@ -204,7 +205,7 @@ void parseCommands() {
             case 'm': {
                 for (uint8_t i = 0; i < RECEIVER_COUNT; i++) {
                     EepromSettings.rssiMax[i] =
-                        (uint16_t) receivers[i].rssiRaw * 1.025f;
+                        (uint16_t) receivers[i].rssiRaw;
                 }
 
                 EepromSettings.save();
@@ -224,7 +225,8 @@ void parseCommands() {
         }
 
         Serial.find('\n');
-        Serial.println(F("ok"));
+        Serial.print(F("ok"));
+        Serial.print(lineEnding);
     }
 }
 
