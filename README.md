@@ -1,3 +1,9 @@
+# STOP!
+
+__This project has moved to GitLab:__ https://gitlab.com/PropNuts/wizardtracker-hardware
+
+__There will be no further updates here.__
+
 # wizardtracker-hardware
 
 This project contains the hardware and firmware for the PropNuts WizardTracker,
